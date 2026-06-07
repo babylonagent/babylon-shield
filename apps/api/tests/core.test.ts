@@ -1,0 +1,30 @@
+import { describe, expect, it, beforeEach } from 'vitest';
+import { decodeApprovalCall } from '../src/decoders/erc20.js';
+import { scoreRisks } from '../src/services/risk-engine.js';
+import { authenticateApiKey, parseApiKeys } from '../src/services/api-keys.js';
+import { checkRateLimit, resetRateLimitsForTests } from '../src/services/rate-limit.js';
+import { buildServer } from '../src/server.js';
+import { config } from '../src/config.js';
+const OWNER = '0x0000000000000000000000000000000000000001';
+const TOKEN = '0x0000000000000000000000000000000000000002';
+const SPENDER = '0x0770d2124C0a581C28Cfc47a659817145e6Cc137';
+const MAX = 'f'.repeat(64);
+describe('core rules', () => {
+ beforeEach(() => { resetRateLimitsForTests(); (config as any).BABYLON_SHIELD_API_KEYS = 'agent:key'; });
+ it('authenticates named keys', () => { const keys = parseApiKeys('agent:key'); expect(authenticateApiKey({ authorization: 'Bearer key' }, keys)).toEqual({ ok: true, name: 'agent' }); });
+ it('rate limits per agent', () => { expect(checkRateLimit('a', 1, 1000, 0).ok).toBe(true); expect(checkRateLimit('a', 1, 1000, 1).ok).toBe(false); });
+ it('decodes unlimited approvals and scores risk', () => { const data = `0x095ea7b3${SPENDER.slice(2).padStart(64,'0')}${MAX}`; const approval = decodeApprovalCall({ from: OWNER, to: TOKEN, data }); expect(approval?.unlimited).toBe(true); const risk = scoreRisks({ status: 'success', approvals: [approval!] }); expect(risk.warnings.map(w => w.code)).toEqual(['UNLIMITED_APPROVAL','UNKNOWN_SPENDER']); });
+ it('serves metrics and threat reporting', async () => {
+   const apiKey = parseApiKeys(config.BABYLON_SHIELD_API_KEYS)[0]?.key;
+   const app = await buildServer();
+   const report = await app.inject({ method: 'POST', url: '/threats/report', headers: { 'x-api-key': apiKey }, payload: { address: '0x0000000000000000000000000000000000000003', threatType: 'honeypot', severity: 'high', description: 'known malicious trap' } });
+   expect(report.statusCode).toBe(201);
+   const threats = await app.inject({ method: 'GET', url: '/threats/0x0000000000000000000000000000000000000003', headers: { 'x-api-key': apiKey } });
+   expect(threats.statusCode).toBe(200);
+   expect(threats.json().threats.length).toBeGreaterThan(0);
+   const metrics = await app.inject({ method: 'GET', url: '/metrics', headers: { 'x-api-key': apiKey } });
+   expect(metrics.statusCode).toBe(200);
+   expect(metrics.json().totalThreatReports).toBeGreaterThan(0);
+   await app.close();
+ });
+});
