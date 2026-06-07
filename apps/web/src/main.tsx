@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -52,7 +52,44 @@ const endpoints = [
   { method: 'GET', path: '/metrics', text: 'Authenticated service usage summary.' },
 ];
 
+const verdictStates = [
+  {
+    risk: 'safe',
+    tone: 'safe',
+    width: '18%',
+    findings: ['No approval change detected', 'Known counterparty profile', 'Transaction cleared for execution'],
+  },
+  {
+    risk: 'warning',
+    tone: 'warning',
+    width: '64%',
+    findings: ['Unlimited approval detected', 'Unknown spender reputation', 'Review before signing'],
+  },
+  {
+    risk: 'danger',
+    tone: 'danger',
+    width: '82%',
+    findings: ['High-risk spender pattern', 'Approval exceeds expected scope', 'Agent policy should halt'],
+  },
+  {
+    risk: 'blocked',
+    tone: 'blocked',
+    width: '100%',
+    findings: ['Threat intelligence match', 'Known malicious approval target', 'Execution blocked by policy'],
+  },
+];
+
 function App() {
+  const [verdictIndex, setVerdictIndex] = useState(1);
+  const verdict = verdictStates[verdictIndex];
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setVerdictIndex((current) => (current + 1) % verdictStates.length);
+    }, 2800);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <>
       <header className="site-header">
@@ -78,15 +115,16 @@ function App() {
             <a className="button secondary" href="#endpoints">View endpoints</a>
           </div>
         </div>
-        <aside className="terminal-card" aria-label="Risk panel preview">
+        <aside className={`terminal-card verdict-${verdict.tone}`} aria-label="Risk panel preview">
           <div className="terminal-top"><span></span><span></span><span></span></div>
           <p className="mono-label">SIMULATION RESULT</p>
-          <div className="risk-row"><span>risk</span><strong>warning</strong></div>
-          <div className="risk-meter"><i /></div>
-          <ul>
-            <li>Unlimited approval detected</li>
-            <li>Unknown spender reputation</li>
-            <li>Block before signing if policy requires</li>
+          <div className="risk-row">
+            <span>risk</span>
+            <strong key={verdict.risk}>{verdict.risk}</strong>
+          </div>
+          <div className="risk-meter" aria-hidden="true"><i style={{ width: verdict.width }} /></div>
+          <ul key={`${verdict.risk}-findings`} className="findings-list">
+            {verdict.findings.map((finding) => <li key={finding}>{finding}</li>)}
           </ul>
         </aside>
       </section>
