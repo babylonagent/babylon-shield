@@ -15,4 +15,9 @@ describe('Babylon Shield web app', () => {
       expect(source).toContain('verdict-${verdict.tone}');
     }
   });
+
+  it('uses the uploaded Shield artwork as a fixed background', () => {
+    const styles = readFileSync(resolve(__dirname, 'styles.css'), 'utf8');
+    expect(styles).toContain("url('/babylon-shield-bg.jpg') center / cover fixed no-repeat");
+  });
 });
