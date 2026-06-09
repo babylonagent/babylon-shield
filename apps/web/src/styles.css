@@ -42,7 +42,8 @@ body::before {
 
 .site-header, main, .site-footer { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 0 8px; position: relative; z-index: 1; }
-.brand { color: var(--text); font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.brand img { width: 34px; height: 40px; object-fit: contain; display: block; }
 .site-header nav, .site-footer nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .site-header a, .site-footer a { color: var(--muted); text-decoration: none; font-weight: 600; }
 .site-header a:hover, .site-footer a:hover { color: var(--text); }

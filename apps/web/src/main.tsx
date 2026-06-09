@@ -93,7 +93,10 @@ function App() {
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Babylon Shield home">Babylon Shield</a>
+        <a className="brand" href="#top" aria-label="Babylon Shield home">
+          <img src="/shield_logo_white.png" alt="" aria-hidden="true" />
+          <span>Babylon Shield</span>
+        </a>
         <nav aria-label="Primary navigation">
           <a href="#sdk">SDK</a>
           <a href="#endpoints">API</a>
