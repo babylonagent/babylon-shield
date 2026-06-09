@@ -22,7 +22,7 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    linear-gradient(180deg, rgba(7, 7, 7, 0.32) 0%, rgba(7, 7, 7, 0.46) 42rem, rgba(7, 7, 7, 0.52) 100%),
+    linear-gradient(180deg, rgba(7, 7, 7, 0.27) 0%, rgba(7, 7, 7, 0.39) 42rem, rgba(7, 7, 7, 0.44) 100%),
     radial-gradient(circle at 80% 0%, rgba(216, 181, 109, 0.16), transparent 32rem),
     url('/babylon-shield-bg.jpg') center / cover fixed no-repeat,
     linear-gradient(180deg, #0b0b0a 0%, var(--bg) 44rem);
