@@ -94,7 +94,7 @@ function App() {
     <>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Babylon Shield home">
-          <img src="/shield_logo_white.png" alt="" aria-hidden="true" />
+          <img src="/shield-logo-white-v2.png" alt="" aria-hidden="true" />
           <span>Babylon Shield</span>
         </a>
         <nav aria-label="Primary navigation">

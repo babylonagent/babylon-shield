@@ -24,7 +24,7 @@ describe('Babylon Shield web app', () => {
   it('renders the Shield logo in the header and configures the favicon', () => {
     const source = readFileSync(resolve(__dirname, 'main.tsx'), 'utf8');
     const html = readFileSync(resolve(__dirname, '../index.html'), 'utf8');
-    expect(source).toContain('src="/shield_logo_white.png"');
-    expect(html).toContain('href="/shield_logo_black.png"');
+    expect(source).toContain('src="/shield-logo-white-v2.png"');
+    expect(html).toContain('href="/shield-logo-black-v2.png"');
   });
 });
