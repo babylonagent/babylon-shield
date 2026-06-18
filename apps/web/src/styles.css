@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=supreme@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
   color-scheme: dark;
@@ -27,7 +28,7 @@ body {
     url('/babylon-shield-bg.jpg') center / cover fixed no-repeat,
     linear-gradient(180deg, #0b0b0a 0%, var(--bg) 44rem);
   color: var(--text);
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 body::before {
@@ -42,10 +43,10 @@ body::before {
 
 .site-header, main, .site-footer { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 0 8px; position: relative; z-index: 1; }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-family: 'Supreme', 'Poppins', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
 .brand img { width: 34px; height: 40px; object-fit: contain; display: block; }
 .site-header nav, .site-footer nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-.site-header a, .site-footer a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.site-header a, .site-footer a { color: var(--muted); font-family: 'Supreme', 'Poppins', system-ui, sans-serif; text-decoration: none; font-weight: 600; }
 .site-header a:hover, .site-footer a:hover { color: var(--text); }
 main { padding: 56px 0; }
 section { margin: 0 0 96px; }
@@ -58,7 +59,7 @@ section { margin: 0 0 96px; }
   text-transform: uppercase;
   color: var(--accent);
 }
-h1, h2 { margin: 0; letter-spacing: -0.025em; line-height: 0.95; }
+h1, h2 { margin: 0; font-family: 'Supreme', 'Poppins', system-ui, sans-serif; letter-spacing: -0.025em; line-height: 0.95; }
 h1 { font-size: clamp(42px, 5vw, 72px); max-width: 860px; }
 h2 { font-size: clamp(36px, 5vw, 64px); }
 p { color: var(--muted); line-height: 1.7; font-size: 16px; }
@@ -68,6 +69,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .button {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; padding: 0 18px; border: 1px solid var(--line);
+  font-family: 'Supreme', 'Poppins', system-ui, sans-serif;
   text-decoration: none; color: var(--text); font-weight: 600; border-radius: 999px;
 }
 .button.primary { background: var(--accent); border-color: var(--accent); color: #12100b; }
@@ -82,7 +84,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .terminal-top span { width: 10px; height: 10px; border-radius: 50%; background: #504b42; }
 .risk-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
 .risk-row span { color: var(--text); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-.risk-row strong { color: var(--risk-color); font-size: 36px; letter-spacing: -0.03em; animation: verdict-in 420ms ease both; transition: color 420ms ease; }
+.risk-row strong { color: var(--risk-color); font-family: 'Supreme', 'Poppins', system-ui, sans-serif; font-size: 36px; letter-spacing: -0.03em; animation: verdict-in 420ms ease both; transition: color 420ms ease; }
 .risk-meter { height: 8px; background: #27231b; margin: 24px 0; border-radius: 99px; overflow: hidden; }
 .risk-meter i { display: block; height: 100%; background: var(--risk-color); transition: width 720ms cubic-bezier(0.16, 1, 0.3, 1), background-color 420ms ease; }
 .verdict-safe { --risk-color: var(--safe); }
@@ -95,7 +97,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 ul { color: var(--muted); line-height: 2; padding-left: 20px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .stat-card { padding: 24px; border-radius: 24px; }
-.stat-card strong { display: block; font-size: 42px; letter-spacing: -0.03em; margin: 12px 0 6px; }
+.stat-card strong { display: block; font-family: 'Supreme', 'Poppins', system-ui, sans-serif; font-size: 42px; letter-spacing: -0.03em; margin: 12px 0 6px; }
 .stat-card span { color: var(--muted); }
 .code-stack { display: grid; gap: 16px; }
 pre { margin: 0; padding: 22px; border-radius: 22px; overflow-x: auto; color: #eee4cf; font-size: 13px; line-height: 1.65; }
@@ -112,9 +114,16 @@ pre { margin: 0; padding: 22px; border-radius: 22px; overflow-x: auto; color: #e
 .cta { text-align: center; padding: 56px 24px; border-radius: 32px; }
 .cta p { max-width: 680px; margin: 16px auto 28px; }
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 8px 0 40px; color: var(--muted); border-top: 1px solid var(--line); }
-.site-footer span { color: var(--text); font-weight: 600; }
+.site-footer span { color: var(--text); font-family: 'Supreme', 'Poppins', system-ui, sans-serif; font-weight: 600; }
 
 @media (max-width: 900px) {
+  body {
+    background:
+      linear-gradient(180deg, rgba(7, 7, 7, 0.34) 0%, rgba(7, 7, 7, 0.52) 34rem, rgba(7, 7, 7, 0.72) 100%),
+      radial-gradient(circle at 70% 0%, rgba(216, 181, 109, 0.14), transparent 22rem),
+      url('/babylon-shield-bg.jpg') top center / 100% auto no-repeat,
+      linear-gradient(180deg, #0b0b0a 0%, var(--bg) 34rem);
+  }
   main { padding-top: 32px; }
   .site-header, .site-footer { align-items: flex-start; flex-direction: column; }
   h1 { font-size: clamp(38px, 12vw, 56px); }
